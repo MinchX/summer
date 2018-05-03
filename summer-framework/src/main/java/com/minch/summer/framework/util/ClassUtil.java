@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileFilter;
-import java.io.IOException;
 import java.net.JarURLConnection;
 import java.net.URL;
 import java.util.Enumeration;
@@ -26,6 +25,10 @@ public final class ClassUtil {
 
     public static ClassLoader getClassLoader(){
         return Thread.currentThread().getContextClassLoader();
+    }
+
+    public static Class<?> loadClass(String className){
+        return loadClass(className,false);
     }
 
     public static Class<?> loadClass(String className,boolean isInitialized){

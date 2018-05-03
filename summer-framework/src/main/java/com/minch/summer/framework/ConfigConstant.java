@@ -11,14 +11,14 @@ public interface ConfigConstant {
     String CONFIG_FILE="summer.properties";
 
     String JDBC_DRIVERCLASSNAME = "summer.framework.jdbc.driverClassName";
-    String JDBC_url= "summer.framework.jdbc.url";
-    String JDBC_username= "summer.framework.jdbc.username";
-    String JDBC_password= "summer.framework.jdbc.password";
-    String JDBC_maxActive= "summer.framework.jdbc.maxActive";
-    String JDBC_initialSize= "summer.framework.jdbc.initialSize";
-    String JDBC_maxWait= "summer.framework.jdbc.maxWait";
-    String JDBC_maxIdle= "summer.framework.jdbc.maxIdle";
-    String JDBC_minIdle= "summer.framework.jdbc.minIdle";
+    String JDBC_URL= "summer.framework.jdbc.url";
+    String JDBC_USERNAME= "summer.framework.jdbc.username";
+    String JDBC_PASSWORD= "summer.framework.jdbc.password";
+    String JDBC_MAXACTIVE= "summer.framework.jdbc.maxActive";
+    String JDBC_INITIALSIZE= "summer.framework.jdbc.initialSize";
+    String JDBC_MAXWAIT= "summer.framework.jdbc.maxWait";
+    String JDBC_MAXIDLE= "summer.framework.jdbc.maxIdle";
+    String JDBC_MINIDLE= "summer.framework.jdbc.minIdle";
 
     String APP_BASE_PACKAGE= "summer.framework.app.base.package";
     String APP_JSP_PATH= "summer.framework.app.jsp.path";
