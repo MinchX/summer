@@ -14,4 +14,8 @@ public class StringUtil {
     public static boolean isNotEmpty(String packageName) {
         return false;
     }
+
+    public static String[] splitString(String sourceStr, String splitStr) {
+        return sourceStr.split(splitStr);
+    }
 }
