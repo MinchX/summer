@@ -5,7 +5,7 @@ import com.minch.summer.framework.util.ArrayUtil;
 import com.minch.summer.framework.util.CollectionUtil;
 import com.minch.summer.framework.util.ReflectionUtil;
 
-import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.Map;
 
 /**
@@ -18,8 +18,24 @@ import java.util.Map;
 public class IocHelper {
 
     static {
+        //获取所有bean的class和object的对应关系
         Map<Class<?>,Object> beanMap = BeanHelper.getBeanMap();
         if (CollectionUtil.isNotEmpty(beanMap)){
+
+            beanMap.forEach((beanClass,beanObject)->{
+                if (ArrayUtil.isNotEmpty(beanClass.getDeclaredFields())){
+                    Arrays.stream(beanClass.getDeclaredFields()).forEach(beanField->{
+                        if (beanField.isAnnotationPresent(Inject.class)){
+                            Class<?> beanFieldClass = beanField.getType();
+                            Object beanFieldinstance = beanMap.get(beanFieldClass);
+                            if (beanFieldinstance != null) {
+                                ReflectionUtil.setField(beanObject,beanField,beanFieldinstance);
+                            }
+                        }
+                    });
+                }
+            });
+/**
             for (Map.Entry<Class<?>,Object> beanEntry : beanMap.entrySet()){
                 Class<?> beanClass = beanEntry.getKey();
                 Object beanInstance = beanEntry.getValue();
@@ -36,6 +52,7 @@ public class IocHelper {
                     }
                 }
             }
+ **/
         }
     }
 
