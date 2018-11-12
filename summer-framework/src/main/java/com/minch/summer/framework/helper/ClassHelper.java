@@ -4,6 +4,7 @@ import com.minch.summer.framework.annotation.Controller;
 import com.minch.summer.framework.annotation.Service;
 import com.minch.summer.framework.util.ClassUtil;
 
+import java.lang.annotation.Annotation;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -53,4 +54,25 @@ public final class ClassHelper {
         classSet.addAll(getControllerClassSet());
         return classSet;
     }
+
+    public static Set<Class<?>> getClassSetBySuper(Class<?> superClass){
+        Set<Class<?>> classSet = new HashSet<>();
+        CLASS_SET.forEach(cls->{
+            if (superClass.isAssignableFrom(cls)&&!superClass.equals(cls)){
+                classSet.add(cls);
+            }
+        });
+        return classSet;
+    }
+
+    public static Set<Class<?>> getClassSetByAnnotation(Class<? extends Annotation> annotationClass){
+        Set<Class<?>> classSet = new HashSet<>();
+        CLASS_SET.forEach(cls->{
+            if (cls.isAnnotationPresent(annotationClass)){
+                classSet.add(cls);
+            }
+        });
+        return classSet;
+    }
+
 }

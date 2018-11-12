@@ -50,12 +50,14 @@ public class DispatcherServlet extends HttpServlet {
     public void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         String requestMethod = req.getMethod().toLowerCase();
         String requestPath = req.getPathInfo();
-
+        //根据访问地址获取Handler对象
         Handler handler = ControllerHelper.getHandler(requestMethod,requestPath);
 
         if (handler!=null){
+            //从handler对象中获取controller，从beanhelper里获取controller对象
             Class<?> controllerClass = handler.getControllerClass();
             Object controllerBean = BeanHelper.getBean(controllerClass);
+            //将参数整合到paramMap中
             Map<String,Object> paramMap = new HashMap<String, Object>();
             Enumeration<String> paramNames= req.getParameterNames();
             while (paramNames.hasMoreElements()){
@@ -78,6 +80,7 @@ public class DispatcherServlet extends HttpServlet {
                 }
             }
             Param param = new Param(paramMap);
+            //调用controller中的action方法
             Method actionMethod = handler.getActionMethod();
             Object result = ReflectionUtil.invokeMethod(controllerBean,actionMethod,param);
 
